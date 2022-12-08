@@ -4,8 +4,8 @@ require('dotenv').config();
 const PORT = process.env.PORT;
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
-var cors = require('cors');
-app.use(cors({optionsSuccessStatus: 200}));  // some legacy browsers choke on 204
+// var cors = require('cors');
+// app.use(cors({optionsSuccessStatus: 200}));  // some legacy browsers choke on 204
 
 app.use(express.static('public'));
 
@@ -35,16 +35,13 @@ app.get('/api/:timestamp', (req,res) => {
       unix: num,
       utc: new Date( num ).toUTCString()
     });
-  } 
-
-  if ( new Date( timestamp ).toString() !== "Invalid Date" ) {
+  } else if ( new Date( timestamp ).toString() !== "Invalid Date" ) {
     let dateObj = new Date( timestamp );
     res.json({
       unix: dateObj.getTime(),
       utc: dateObj.toUTCString()
     });
-  }
-  res.json({ error : "Invalid Date" });
+  } else res.json({ error : "Invalid Date" });
 });
 
 // listen for requests :)
