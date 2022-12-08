@@ -1,6 +1,6 @@
 // index.js
 // where your node app starts
-const PORT=3000;
+const PORT=process.env.PORT;
 // init project
 var express = require('express');
 var app = express();
